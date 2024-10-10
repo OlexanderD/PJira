@@ -1,12 +1,14 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pjira.Core.Models
+namespace Pjira.Application.Assigments.Commands.UpdateAssigment
 {
-    public class Assignment
+    public class UpdateAssigmentCommand:IRequest
     {
         public Guid Id { get; set; }
 

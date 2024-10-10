@@ -1,12 +1,13 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pjira.Core.Models
+namespace Pjira.Application.Tasks.Commands.CreateTask
 {
-    public class Assignment
+    public class CreateAssigmentCommand:IRequest<Guid>
     {
         public Guid Id { get; set; }
 
@@ -15,5 +16,7 @@ namespace Pjira.Core.Models
         public string Description { get; set; }
 
         public TaskStatus Status { get; set; }
+
+
     }
 }

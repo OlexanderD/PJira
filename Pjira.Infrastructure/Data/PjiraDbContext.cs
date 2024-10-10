@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Pjira.Application.Common.Interfaces;
+using Pjira.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +11,13 @@ using System.Threading.Tasks;
 
 namespace Pjira.Infrastructure.Data
 {
-    public sealed class PjiraDbContext:DbContext
+    public  class PjiraDbContext:DbContext, IPjiraDbContext
     {
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
 
         public PjiraDbContext(DbContextOptions<PjiraDbContext> options) : base(options)
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
