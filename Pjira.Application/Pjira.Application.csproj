@@ -15,4 +15,9 @@
     <ProjectReference Include="..\Pjira.Core\Pjira.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\MappingProfiles\" />
+    <Folder Include="DtoModels\" />
+  </ItemGroup>
+
 </Project>

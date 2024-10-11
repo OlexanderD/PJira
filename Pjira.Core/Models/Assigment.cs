@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pjira.Core.Models
+﻿namespace Pjira.Core.Models
 {
     public class Assignment
     {
@@ -16,4 +10,6 @@ namespace Pjira.Core.Models
 
         public TaskStatus Status { get; set; }
     }
+
+
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Pjira.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c4c7dffac23a837abada2e8e6bd9010c2237fd5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+55842e809ac7253b4f92339f8f42067c80fe63f8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Pjira.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Pjira.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
