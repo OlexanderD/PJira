@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pjira.Application\Pjira.Application.csproj" />
+    <ProjectReference Include="..\Pjira.Core\Pjira.Core.csproj" />
   </ItemGroup>
 
 </Project>
