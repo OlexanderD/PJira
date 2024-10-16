@@ -13,4 +13,4 @@ EXPOSE 8080
 
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "PJira.API.dll"]
+ENTRYPOINT ["dotnet", "Pjira.API.dll"]
