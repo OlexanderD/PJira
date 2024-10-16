@@ -83,7 +83,7 @@ jobs:
           chmod 600 ~/.ssh/test_rsa
           ssh-keyscan -p 2229 ${{vars.SSH_HOST}} >> ~/.ssh/known_hosts
           ssh -i ~/.ssh/test_rsa -p 2229 -v ${{vars.SSH_USER}}@${{vars.SSH_HOST}} << 'EOF'
-            sudo docker pull ${{ env.IMAGE_NAME }}:master
+            sudo docker pull ${{ steps.meta.outputs.tags }}
             sudo docker stop pankira-sC
             sudo docker rm pankira-sC
             sudo docker run -d -p 8083:8080 --name pankira-sC ${{ env.IMAGE_NAME }}:master
