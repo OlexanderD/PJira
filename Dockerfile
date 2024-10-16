@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /PJira
 
 COPY . .
-WORKDIR /PJira/Pjira.API/
+WORKDIR /PJira/src/Pjira.API/
 RUN dotnet restore
 RUN dotnet build -c Release -o /app --no-restore
 
