@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /PJira
 
 COPY . .
-WORKDIR /PJira/src/Pjira.API/
+WORKDIR /PJira/src/Pjira.Api/
 RUN dotnet restore
 RUN dotnet build -c Release -o /app --no-restore
 
@@ -13,4 +13,4 @@ EXPOSE 8080
 
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "Pjira.API.dll"]
+ENTRYPOINT ["dotnet", "Pjira.Api.dll"]
