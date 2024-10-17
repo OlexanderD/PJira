@@ -1,4 +1,6 @@
-﻿namespace Pjira.Core.Models
+﻿using Pjira.Core.Enums;
+
+namespace Pjira.Core.Models
 {
     public class Assignment
     {
@@ -8,7 +10,7 @@
 
         public string Description { get; set; }
 
-        public TaskStatus Status { get; set; }
+        public AssigmentStatus Status { get; set; }
     }
 
 

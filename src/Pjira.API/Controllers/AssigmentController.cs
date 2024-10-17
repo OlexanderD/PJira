@@ -34,13 +34,8 @@ namespace Pjira.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, UpdateAssigmentCommand command)
+        public async Task<IActionResult> Update(UpdateAssigmentCommand command)
         {
-            if (id != command.Id)
-            {
-                return BadRequest();
-            }
-
             await _mediator.Send(command);
             return Ok();
         }

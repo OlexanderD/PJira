@@ -15,6 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pjira.Core", "src\Pjira.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pjira.Infrastructure", "src\Pjira.Infrastructure\Pjira.Infrastructure.csproj", "{8ADCF289-B139-48AC-8561-0461DE685856}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{0FDCE7A4-65D4-4855-95AD-8679DF05CADC}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pjira.Application.Tests", "tests\Pjira.Application.Tests\Pjira.Application.Tests.csproj", "{C39FB3A5-70D2-4148-8FF4-284CE3297651}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +44,10 @@ Global
 		{8ADCF289-B139-48AC-8561-0461DE685856}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ADCF289-B139-48AC-8561-0461DE685856}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ADCF289-B139-48AC-8561-0461DE685856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C39FB3A5-70D2-4148-8FF4-284CE3297651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C39FB3A5-70D2-4148-8FF4-284CE3297651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C39FB3A5-70D2-4148-8FF4-284CE3297651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C39FB3A5-70D2-4148-8FF4-284CE3297651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +57,7 @@ Global
 		{FDA0C8C1-8F6A-4F8D-AB4D-65D1A8BDA889} = {059BF31D-75F1-4831-94B0-8C1E9895E335}
 		{09F4870C-6E57-489B-88E9-5E2737432659} = {059BF31D-75F1-4831-94B0-8C1E9895E335}
 		{8ADCF289-B139-48AC-8561-0461DE685856} = {059BF31D-75F1-4831-94B0-8C1E9895E335}
+		{C39FB3A5-70D2-4148-8FF4-284CE3297651} = {966A6177-779C-4D17-9642-03317EB6DA6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5BC834B5-6F8E-438C-8069-E5381D99C54A}

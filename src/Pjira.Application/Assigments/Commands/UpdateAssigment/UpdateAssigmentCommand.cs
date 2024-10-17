@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Pjira.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,6 @@ namespace Pjira.Application.Assigments.Commands.UpdateAssigment
 
         public string Description { get; set; }
 
-        public TaskStatus Status { get; set; }
+        public AssigmentStatus Status { get; set; }
     }
 }
