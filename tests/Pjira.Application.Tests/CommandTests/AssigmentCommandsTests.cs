@@ -95,7 +95,7 @@ namespace Pjira.Application.Tests.CommandTests
         public async void Should_Update_Assigment()
         {
             var mockDbContext = new Mock<IPjiraDbContext>();
-            var mockAssignmentDbSet = new Mock<DbSet<Assignment>>();
+            
 
 
             var assigmentId = Guid.NewGuid();
@@ -109,18 +109,21 @@ namespace Pjira.Application.Tests.CommandTests
                 Description = "Test",
 
                 Status = AssigmentStatus.New,
-            };          
+            };
+
+            List<Assignment> assignments = new List<Assignment> { existingAssigment };
+
 
             var command = new UpdateAssigmentCommand
             {
                 Id = assigmentId,
-                Title = "Test Task",
-                Description = "Test Description",
+                Title = "TestUpdated",
+                Description = "Test!",
                 Status = AssigmentStatus.InProgress,
             };
 
 
-            mockDbContext.Setup(x => x.Assignments).Returns(mockAssignmentDbSet.Object);
+            mockDbContext.Setup(x => x.Assignments).ReturnsDbSet(assignments);
 
             mockDbContext.Setup(x => x.Assignments.Update(It.IsAny<Assignment>()));
                
@@ -136,7 +139,7 @@ namespace Pjira.Application.Tests.CommandTests
             Assert.True(existingAssigment.Status == AssigmentStatus.InProgress);
 
           
-            mockAssignmentDbSet.Verify(mock => mock.Update(existingAssigment), Times.Once);
+            mockDbContext.Verify(mock => mock.Assignments.Update(existingAssigment), Times.Once);
             mockDbContext.Verify(mock => mock.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
     }
