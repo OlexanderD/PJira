@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Pjira.Application.Common.Interfaces;
 using Pjira.Core.Models;
 using System;
@@ -20,6 +21,7 @@ namespace Pjira.Application.Tasks.Commands.CreateTask
 
         public async Task<Guid> Handle(CreateAssigmentCommand command,CancellationToken cancellationToken)
         {
+            
             var task = new Assignment
             {
                 Title = command.Title,

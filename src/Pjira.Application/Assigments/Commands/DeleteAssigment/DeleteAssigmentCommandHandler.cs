@@ -23,7 +23,7 @@ namespace Pjira.Application.Assigments.Commands.DeleteAssigment
 
             if (assigment == null)
             {
-                throw new Exception("Puka");
+                throw new Exception("Assigment Exception");
             }
 
             _pjiracontext.Assignments.Remove(assigment);

@@ -15,9 +15,11 @@ namespace Pjira.Infrastructure.Data
     {
         public DbSet<Assignment> Assignments { get; set; }
 
+        public DbSet<Project> Projects { get; set; }
+
         public PjiraDbContext(DbContextOptions<PjiraDbContext> options) : base(options)
         {
-           
+        
             Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

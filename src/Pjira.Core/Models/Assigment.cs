@@ -11,6 +11,11 @@ namespace Pjira.Core.Models
         public string Description { get; set; }
 
         public AssigmentStatus Status { get; set; }
+
+        public Guid? ProjectId { get; set; }
+
+        public Project? Project { get; set; }
+        
     }
 
 

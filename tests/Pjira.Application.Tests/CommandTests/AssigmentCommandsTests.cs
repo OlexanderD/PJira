@@ -125,7 +125,6 @@ namespace Pjira.Application.Tests.CommandTests
 
             mockDbContext.Setup(x => x.Assignments).ReturnsDbSet(assignments);
 
-            mockDbContext.Setup(x => x.Assignments.Update(It.IsAny<Assignment>()));
                
             var handler = new UpdateAssigmentCommandHandler(mockDbContext.Object);
 
