@@ -10,6 +10,9 @@ builder.Services.AddApiServices()
 
 var app = builder.Build();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {

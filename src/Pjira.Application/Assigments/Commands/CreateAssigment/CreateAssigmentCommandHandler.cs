@@ -22,7 +22,7 @@ namespace Pjira.Application.Tasks.Commands.CreateTask
         public async Task<Guid> Handle(CreateAssigmentCommand command,CancellationToken cancellationToken)
         {
             
-            var task = new Assignment
+            var assignment = new Assignment
             {
                 Title = command.Title,
 
@@ -30,13 +30,15 @@ namespace Pjira.Application.Tasks.Commands.CreateTask
 
                 Status = command.Status,
 
+                ProjectId = command.ProjectId,
+
             };
 
-            _pjiraDbContext.Assignments.Add(task);
+            _pjiraDbContext.Assignments.Add(assignment);
 
             await _pjiraDbContext.SaveChangesAsync(cancellationToken);
 
-            return task.Id;
+            return assignment.Id;
 
         }
     }

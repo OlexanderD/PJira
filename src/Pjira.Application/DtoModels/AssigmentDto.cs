@@ -1,15 +1,13 @@
-﻿using MediatR;
-using Pjira.Core.Enums;
-using Pjira.Core.Models;
+﻿using Pjira.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pjira.Application.Tasks.Commands.CreateTask
+namespace Pjira.Application.DtoModels
 {
-    public class CreateAssigmentCommand:IRequest<Guid>
+    public class AssigmentDto
     {
         public Guid Id { get; set; }
 
@@ -20,6 +18,5 @@ namespace Pjira.Application.Tasks.Commands.CreateTask
         public AssigmentStatus Status { get; set; }
 
         public Guid? ProjectId { get; set; }
-
     }
 }

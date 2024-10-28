@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Pjira.Application.Common.Interfaces;
+using Pjira.Application.DtoModels;
 using Pjira.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -10,16 +12,20 @@ using System.Threading.Tasks;
 
 namespace Pjira.Application.Projects.Queries.GetProjectById
 {
-    public class GetProjectByIdQueryHandler : IRequestHandler<GetProjectByIdQuery,Project>
+    public class GetProjectByIdQueryHandler : IRequestHandler<GetProjectByIdQuery,ProjectDto>
     {
         private readonly IPjiraDbContext _pjiraDbContext;
 
-        public GetProjectByIdQueryHandler(IPjiraDbContext pjiraDbContext)
+        private readonly IMapper _mapper;
+
+        public GetProjectByIdQueryHandler(IPjiraDbContext pjiraDbContext,IMapper mapper)
         {
             _pjiraDbContext = pjiraDbContext;
+
+            _mapper = mapper;
         }
 
-        public async Task<Project> Handle(GetProjectByIdQuery query,CancellationToken cancellationToken)
+        public async Task<ProjectDto> Handle(GetProjectByIdQuery query,CancellationToken cancellationToken)
         {
             var project = await _pjiraDbContext.Projects.Include(x => x.Assignments).FirstOrDefaultAsync(x => x.Id == query.Id,cancellationToken);
 
@@ -28,7 +34,9 @@ namespace Pjira.Application.Projects.Queries.GetProjectById
                 throw new Exception($"Project with ID {query.Id} not found.");
             }
 
-            return project;
+            var ProjectDto = _mapper.Map<ProjectDto>(project);
+
+            return ProjectDto;
         }
     }
 }

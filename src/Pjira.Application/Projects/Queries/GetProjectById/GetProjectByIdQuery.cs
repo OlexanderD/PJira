@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Pjira.Application.DtoModels;
 using Pjira.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Pjira.Application.Projects.Queries.GetProjectById
 {
-    public class GetProjectByIdQuery:IRequest<Project>
+    public class GetProjectByIdQuery:IRequest<ProjectDto>
     {
         public Guid Id { get; set; }
 

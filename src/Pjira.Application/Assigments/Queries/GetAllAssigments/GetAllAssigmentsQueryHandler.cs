@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Pjira.Application.Common.Interfaces;
+using Pjira.Application.DtoModels;
 using Pjira.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -10,20 +12,26 @@ using System.Threading.Tasks;
 
 namespace Pjira.Application.Assigments.Queries.GetAllAssigments
 {
-    public class GetAllAssigmentsQueryHandler:IRequestHandler<GetAllAssigmentQuery , List<Assignment>>
+    public class GetAllAssigmentsQueryHandler : IRequestHandler<GetAllAssigmentQuery, List<AssigmentDto>>
     {
         private readonly IPjiraDbContext _pjiraDbContext;
 
-        public GetAllAssigmentsQueryHandler(IPjiraDbContext pjiraDbContext)
+        private readonly IMapper _mapper;
+
+        public GetAllAssigmentsQueryHandler(IPjiraDbContext pjiraDbContext,IMapper mapper)
         {
             _pjiraDbContext = pjiraDbContext;   
+
+            _mapper = mapper;
         }
 
-        public async Task<List<Assignment>> Handle(GetAllAssigmentQuery query,CancellationToken cancellationToken)
+        public async Task<List<AssigmentDto>> Handle(GetAllAssigmentQuery query,CancellationToken cancellationToken)
         {
             var assigments = await _pjiraDbContext.Assignments.ToListAsync(cancellationToken);
+
+            var assigmentDto = _mapper.Map<List<AssigmentDto>>(assigments);
             
-            return assigments;
+            return assigmentDto;
         }
     }
 }

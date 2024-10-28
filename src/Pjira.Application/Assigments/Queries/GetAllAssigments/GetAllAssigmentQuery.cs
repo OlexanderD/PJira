@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Pjira.Application.DtoModels;
 using Pjira.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Pjira.Application.Assigments.Queries.GetAllAssigments
 {
-    public class GetAllAssigmentQuery:IRequest<List<Assignment>>
+    public class GetAllAssigmentQuery:IRequest<List<AssigmentDto>>
     {
        
     }

@@ -17,6 +17,8 @@ namespace Pjira.Application
                 configuration.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
             });
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             return services;
         }
     }
