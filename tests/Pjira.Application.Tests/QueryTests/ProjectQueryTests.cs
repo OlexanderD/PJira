@@ -1,7 +1,9 @@
-﻿using Moq;
+﻿using AutoMapper;
+using Moq;
 using Moq.EntityFrameworkCore;
 using Pjira.Application.Assigments.Queries.GetAllAssigments;
 using Pjira.Application.Common.Interfaces;
+using Pjira.Application.DtoModels;
 using Pjira.Application.Projects.Queries.GetAllProjects;
 using Pjira.Application.Projects.Queries.GetProjectById;
 using Pjira.Core.Models;
@@ -28,12 +30,20 @@ namespace Pjira.Application.Tests.QueryTests
 
             var mockPjiraContext = new Mock<IPjiraDbContext>();
 
+            var MockMapper = new Mock<IMapper>();
+
+            MockMapper.Setup(m => m.Map<List<ProjectDto>>(projects))
+                .Returns(new List<ProjectDto>
+                {
+                    new ProjectDto { Id = projects[0].Id},
+                    new ProjectDto { Id = projects[0].Id}
+                });
 
             mockPjiraContext.Setup(x => x.Projects).ReturnsDbSet(projects);
 
             var query = new GetAllProjectsQuery();
 
-            var handler = new GetAllProjectsQueryHandler(mockPjiraContext.Object);
+            var handler = new GetAllProjectsQueryHandler(mockPjiraContext.Object, MockMapper.Object);
 
             var result = await handler.Handle(query, CancellationToken.None);
 
@@ -59,7 +69,12 @@ namespace Pjira.Application.Tests.QueryTests
 
             var query = new GetProjectByIdQuery(projectId);
 
-            var handler = new GetProjectByIdQueryHandler(mockPjiraContext.Object);
+            var MockMapper = new Mock<IMapper>();
+
+            MockMapper.Setup(m => m.Map<ProjectDto>(project))
+                .Returns(new ProjectDto { Id = projectId });
+
+            var handler = new GetProjectByIdQueryHandler(mockPjiraContext.Object, MockMapper.Object);
 
             var result = await handler.Handle(query, CancellationToken.None);
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -33,17 +34,17 @@ namespace Pjira.Api.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest("RegistationFailed");
+                return BadRequest(result.Errors);
             }
             await _signInManager.SignInAsync(user, false);           
 
             return Ok("Registration Completed");
         }
-        [HttpGet("{Login}")]
+        [HttpGet("Login")]
         public async Task<IActionResult> SignIn([FromQuery] User userViewModel)
         {
            
-            var user = _userManager.FindByNameAsync(userViewModel.UserName);
+            var user = await _userManager.FindByNameAsync(userViewModel.UserName);
 
             if (user == null)
             {
@@ -60,6 +61,7 @@ namespace Pjira.Api.Controllers
             return Ok("Login completed");
         }
         [HttpPost("Logout")]
+        [Authorize]
         public async Task<IActionResult> SignOut()
         {
 

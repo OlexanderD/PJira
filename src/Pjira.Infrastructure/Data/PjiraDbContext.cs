@@ -15,7 +15,7 @@ namespace Pjira.Infrastructure.Data
 
         public PjiraDbContext(DbContextOptions<PjiraDbContext> options) : base(options)
         {
-            Database.EnsureDeleted();
+            
             Database.EnsureCreated();
 
         }

@@ -21,7 +21,6 @@ namespace Pjira.Application.Tests.CommandTests
     public class AssigmentCommandsTests
     {
         [Fact]
-
         public async void Should_Succesfully_AddAssigment()
         {
             var mockDbContext = new Mock<IPjiraDbContext>();        
