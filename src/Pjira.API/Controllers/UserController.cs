@@ -59,7 +59,7 @@ namespace Pjira.Api.Controllers
                 return BadRequest("Invalid username or password");
             }
 
-            if (user == null || !await _userManager.CheckPasswordAsync(user, userViewModel.Password))
+            if (!await _userManager.CheckPasswordAsync(user, userViewModel.Password))
             {
                 return Unauthorized("Invalid username or password");
             }

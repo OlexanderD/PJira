@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -22,7 +23,7 @@ namespace Pjira.Api
 
                     Name = "Authorization",
 
-                    Type = SecuritySchemeType.ApiKey,
+                    Type = SecuritySchemeType.Http,
 
                     Scheme = "Bearer"
                 });
@@ -63,7 +64,7 @@ namespace Pjira.Api
 
                         ValidateAudience = true,
 
-                        ValidAudience = configuration["Jwt:Issuer"],
+                        ValidAudience = configuration["Jwt:Audience"],
 
                         ValidateLifetime = true,
 
@@ -72,6 +73,11 @@ namespace Pjira.Api
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
                     };
                 });
+
+            services.AddAuthorization(options => options.DefaultPolicy =
+                new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .Build());
 
             return services;
         }
