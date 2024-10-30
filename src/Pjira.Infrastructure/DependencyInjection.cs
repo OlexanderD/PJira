@@ -20,14 +20,7 @@ namespace Pjira.Infrastructure
 
             services.AddScoped<IPjiraDbContext, PjiraDbContext>();
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-            })
-                .AddEntityFrameworkStores<PjiraDbContext>();
+            
                 
 
 

@@ -1,10 +1,9 @@
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Pjira.Api;
 using Pjira.Application;
 using Pjira.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddApiServices()
+builder.Services.AddApiServices(builder.Configuration)
     .AddApplicationServices()
     .AddInfrustructureServices(builder.Configuration);
 

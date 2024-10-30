@@ -1,9 +1,14 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Pjira.Core.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
+using Pjira.Application.DtoModels;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Pjira.Api.Controllers
 {
@@ -17,11 +22,14 @@ namespace Pjira.Api.Controllers
 
         private readonly IMapper _mapper;
 
-        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IMapper mapper)
+        private readonly IConfiguration _config;
+
+        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IMapper mapper, IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
+            _config = config;
         }
 
         [HttpPost]
@@ -36,9 +44,9 @@ namespace Pjira.Api.Controllers
             {
                 return BadRequest(result.Errors);
             }
-            await _signInManager.SignInAsync(user, false);           
 
-            return Ok("Registration Completed");
+            var token = GenerateJwtToken(user);
+            return Ok(new { token });
         }
         [HttpGet("Login")]
         public async Task<IActionResult> SignIn([FromQuery] User userViewModel)
@@ -51,14 +59,13 @@ namespace Pjira.Api.Controllers
                 return BadRequest("Invalid username or password");
             }
 
-            var result = await _signInManager.PasswordSignInAsync(userViewModel.UserName, userViewModel.Password, isPersistent: false, lockoutOnFailure: false);
-
-            if (!result.Succeeded)
+            if (user == null || !await _userManager.CheckPasswordAsync(user, userViewModel.Password))
             {
-                return BadRequest("Invalid username or password");
-            }         
+                return Unauthorized("Invalid username or password");
+            }
 
-            return Ok("Login completed");
+            var token = GenerateJwtToken(user);
+            return Ok(new { token });
         }
         [HttpPost("Logout")]
         [Authorize]
@@ -74,6 +81,28 @@ namespace Pjira.Api.Controllers
 
 
             return Ok("You have been signed out successfully");
+        }
+
+        private string GenerateJwtToken(IdentityUser user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+
+                new (ClaimTypes.Name, user.UserName)
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                 issuer: _config["Jwt:Issuer"],
+                 audience: _config["Jwt:Audience"],
+                 claims: claims,
+                 expires: DateTime.Now.AddHours(3),
+                  signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

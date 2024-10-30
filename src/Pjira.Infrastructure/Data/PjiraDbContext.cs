@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Pjira.Infrastructure.Data
 {
-    public  class PjiraDbContext: IdentityDbContext<IdentityUser>,IPjiraDbContext
+    public class PjiraDbContext : IdentityDbContext<IdentityUser>, IPjiraDbContext
     {
         public DbSet<Assignment> Assignments { get; set; }
 
